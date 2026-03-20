@@ -1,7 +1,7 @@
 # Skilled AI Agents for Embedded and IoT Systems Development
 
 [![Paper](https://img.shields.io/badge/Paper-ArXiv-red.svg)](#)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202-blue)](LICENSE)
 
 Official codebase for the paper: **"Skilled AI Agents for Embedded and IoT Systems Development"**.
 
