@@ -24,7 +24,7 @@ To bridge this gap, we introduce a **skills-based agentic framework** and **IoT-
 https://github.com/user-attachments/assets/e9f83311-8c1b-4790-baca-0ed0304bca5b
 
 
-
+https://raw.githubusercontent.com/iot-agent/iot-skillsbench/main/docs/assets/demo_video.mp4
 
 ---
 
