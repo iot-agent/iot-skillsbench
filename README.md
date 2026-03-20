@@ -21,8 +21,7 @@ To bridge this gap, we introduce a **skills-based agentic framework** and **IoT-
 
 
 
-<video src="docs/assets/demo_video.mp4" width="320" height="240" controls></video>
-
+https://github.com/user-attachments/assets/e9f83311-8c1b-4790-baca-0ed0304bca5b
 
 
 
