@@ -21,8 +21,7 @@ To bridge this gap, we introduce a **skills-based agentic framework** and **IoT-
 
 
 
-<video src="./docs/assets/demo_video.mp4" autoplay loop muted playsinline width="100%"></video>
-
+<video src="docs/assets/demo_video.mp4" width="320" height="240" controls></video>
 
 
 
