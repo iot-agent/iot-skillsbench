@@ -1,0 +1,2 @@
+Blink an LED at a frequency of 1 Hz. 
+Use GPIO 3 for the LED.

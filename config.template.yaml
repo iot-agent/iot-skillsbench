@@ -3,20 +3,24 @@ input:
   task_dir: "tasks/case011"
   # Optional: filename or index string (e.g. "prompt.txt" or "2")
   prompt_file: prompt.txt
-
-  board: esp32_s3_box_3
-  framework: ESP-IDF #Arduino
+  
+  # Options: {esp32_s3_box_3, arduino_mega_2560, arduino_nano_33_ble}
+  board: arduino_mega_2560
+  # Options: {ESP-IDF, Arduino, Zephyr}
+  framework: Arduino
 
 model:
-  # name: "claude-haiku-4-5"
-  name: "claude-sonnet-4-5"
+  # Model name: e.g., "claude-haiku-4-5"
+  name: "claude-sonnet-4.5"
   temperature: 0.0
   # If omitted, loader falls back to OPENAI_BASE_URL env (then OpenRouter default)
-  api_base: "https://openrouter.ai/api/v1"
+  api_base: "API_BASE"
   # Env var name that stores your API key
   api_key_env: "OPENAI_API_KEY"
 
 graph:
+  # Options: {true, false}
   use_skills: true
+  # Options: {skills-llm-generated, skills-human-expert}
   skills_dir: "skills-human-expert"
   enable_diagram: false
