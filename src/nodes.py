@@ -281,7 +281,7 @@ def prepare_workspace_node(state: AgentState) -> dict:
 
     if state.get("framework") == "Arduino":
     # if "arduino" in active_skills:
-        code_path = output_dir / f"{project_name}.ino"
+        code_path = output_dir / "output.ino"
         active_platform = "arduino"
     elif state.get("framework") == "ESP-IDF":
     # if "esp-idf" in active_skills:
@@ -417,11 +417,11 @@ def assemble_artifacts_node(state: AgentState) -> dict:
     target = workspace["target"]
 
     if target == "arduino":
-        code_rel_path = f"{project_name}.ino"
+        code_rel_path = "output.ino"
     elif target == "esp-idf":
         code_rel_path = "main/main.c"
     elif target == "zephyr":
-        code_rel_path = f"src/main.c"
+        code_rel_path = "src/main.c"
         
     artifacts.append({
         "path": code_rel_path,

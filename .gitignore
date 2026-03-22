@@ -1,0 +1,19 @@
+# Secrets & local env
+.env
+.env.*
+!.env.example
+
+# Local runtime config (keep template)
+config.yaml
+
+*.log
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# OS
+.DS_Store
+Thumbs.db
