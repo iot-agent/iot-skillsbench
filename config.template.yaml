@@ -14,7 +14,7 @@ model:
   name: "claude-sonnet-4.5"
   temperature: 0.0
   # If omitted, loader falls back to OPENAI_BASE_URL env (then OpenRouter default)
-  api_base: "http://hl279-cmp-01.egr.duke.edu:4000"
+  api_base: "API_BASE"
   # Env var name that stores your API key
   api_key_env: "OPENAI_API_KEY"
 
