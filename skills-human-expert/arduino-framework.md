@@ -27,7 +27,10 @@ Keypoints:
 - Do not use delay() or long operations inside the ISR.
 
 ## LiquidCrystal library 
-The LiquidCrystal library is an Arduino framework library for controlling text-based LCD displays based on the Hitachi HD44780 (or compatible) chipset. This library is Arduino framework only and is not available in other frameworks.
+
+- The LiquidCrystal library is an Arduino framework library for controlling text-based LCD displays based on the Hitachi HD44780 (or compatible) chipset.
+- This library call is sufficient for interfacing with an LCD module (e.g., LCD1602) based on the HD44780 controller, and no other skill is needed.
+- This library is Arduino framework only and is not available in other frameworks.
 
 
 ### Usage

@@ -17,3 +17,12 @@
 - Analog inputs
 	- TMP36 temperature sensor: A0
 	- Sound sensor (analog output): A1
+	- Photoresistor light sensor (KY-018): A2
+
+- LCD1602 (4-bit mode)
+	- RS: D48
+	- E:  D49
+	- D4: D46
+	- D5: D47
+	- D6: D44
+	- D7: D45
