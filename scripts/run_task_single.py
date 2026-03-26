@@ -21,7 +21,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from src.config import load_config
 from src.graph import build_graph
-from src.nodes import configure_model, configure_registry
+from src.nodes import configure_auto_pin_mapping, configure_model, configure_registry
 
 
 def read_task(task_path: Path) -> tuple[str, str]:
@@ -60,6 +60,7 @@ def log_config(output_dir: Path, config) -> None:
                 f"use_skills: {config.graph.use_skills}",
                 f"skills_dir: {config.graph.skills_dir}",
                 f"enable_diagram: {config.graph.enable_diagram}",
+                f"auto_pin_mapping: {config.graph.auto_pin_mapping}",
             ]
         )
         + "\n",
@@ -90,11 +91,13 @@ def run_single_task(task_path: Path, task_name: str, task_content: str, config, 
         api_base=config.model.api_base,
         api_key_env=config.model.api_key_env,
     )
+    configure_auto_pin_mapping(enabled=config.graph.auto_pin_mapping)
     configure_registry(skills_dir=config.graph.skills_dir)
 
     app = build_graph(
         use_skills=config.graph.use_skills,
         enable_diagram=config.graph.enable_diagram,
+        enable_pin_mapper=config.graph.auto_pin_mapping,
     )
 
     inputs = {
@@ -110,10 +113,13 @@ def run_single_task(task_path: Path, task_name: str, task_content: str, config, 
 
     for event in app.stream(inputs):
         for node_name, output in event.items():
-            print(f"--- Node: {node_name} ---")
+            print(f"\n--- Node: {node_name} ---")
             if node_name == "manager":
                 print(f"  Project: {output.get('project_name')}")
                 print(f"  Skills: {output.get('active_skills')}")
+            elif node_name == "pin_mapper":
+                print(f"  Pin Mapping Results:")
+                print(output.get("pin_mapping_notes", ""))
             elif node_name == "persist":
                 print(f"  {output.get('status_msg')}")
 

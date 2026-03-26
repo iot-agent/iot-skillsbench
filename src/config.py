@@ -50,6 +50,7 @@ class GraphConfig:
     use_skills: bool = True
     skills_dir: str = "skills"
     enable_diagram: bool = False
+    auto_pin_mapping: bool = True
 
 
 @dataclass(frozen=True)
@@ -137,6 +138,12 @@ def load_config(config_path: str | Path = "config.yaml") -> AppConfig:
     enable_diagram = graph_cfg.get("enable_diagram", False)
     if not isinstance(enable_diagram, bool):
         raise ValueError("Invalid config value: 'graph.enable_diagram' must be boolean.")
+    auto_pin_mapping = graph_cfg.get("auto_pin_mapping")
+    if auto_pin_mapping is None:
+        # Backward compatibility with older config key
+        auto_pin_mapping = graph_cfg.get("pin_mapper_on_missing_pins", True)
+    if not isinstance(auto_pin_mapping, bool):
+        raise ValueError("Invalid config value: 'graph.auto_pin_mapping' must be boolean.")
 
     return AppConfig(
         input=InputConfig(
@@ -155,5 +162,6 @@ def load_config(config_path: str | Path = "config.yaml") -> AppConfig:
             use_skills=use_skills,
             skills_dir=skills_dir,
             enable_diagram=enable_diagram,
+            auto_pin_mapping=auto_pin_mapping,
         ),
     )
