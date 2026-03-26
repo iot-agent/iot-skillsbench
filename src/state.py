@@ -37,6 +37,7 @@ class AgentState(TypedDict, total=False):
     active_platform: Optional[str]
     active_skills: List[str]
     active_skill_content: Optional[str]
+    pin_mapping_notes: Optional[str]
     prepared_output_dir: Optional[str]
     prepared_code_path: Optional[str]
     workspace: WorkspaceInfo

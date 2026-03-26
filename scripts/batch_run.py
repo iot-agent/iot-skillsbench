@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 from src.config import load_config
 from src.graph import build_graph
-from src.nodes import configure_model, configure_registry
+from src.nodes import configure_auto_pin_mapping, configure_model, configure_registry
 
 
 def parse_tasks(filepath: str) -> dict:
@@ -133,10 +133,15 @@ def run_task(task_id: str, task_content: str, config, output_dir: str):
             api_base=config.model.api_base,
             api_key_env=config.model.api_key_env,
         )
+        configure_auto_pin_mapping(enabled=config.graph.auto_pin_mapping)
 
         configure_registry(skills_dir=config.graph.skills_dir)
 
-        app = build_graph(use_skills=config.graph.use_skills, enable_diagram=config.graph.enable_diagram)
+        app = build_graph(
+            use_skills=config.graph.use_skills,
+            enable_diagram=config.graph.enable_diagram,
+            enable_pin_mapper=config.graph.auto_pin_mapping,
+        )
 
         inputs = {
             "requirements": task_prefix + task_content,
@@ -180,6 +185,7 @@ def log_config(output_dir: str, config):
         f.write(f"use_skills: {config.graph.use_skills}\n")
         f.write(f"skills_dir: {config.graph.skills_dir}\n")
         f.write(f"enable_diagram: {config.graph.enable_diagram}\n")
+        f.write(f"auto_pin_mapping: {config.graph.auto_pin_mapping}\n")
 
     print(f"📝 Config logged to {log_path}")
 

@@ -19,15 +19,11 @@
 	- Temperature sensor (TMP36): A0
 	- Sound sensor analog output (KY-037): A1
 	- Photoresistor light sensor (KY-018): A2
+	- Joystick (KY-023): A3 (x-axis), A4 (y-axis)
 
-- LCD1602 (4-bit mode)
-	- RS: D48
-	- E:  D49
-	- D4: D46
-	- D5: D47
-	- D6: D44
-	- D7: D45
+- Display
+	- LCD1602 (4-bit mode): D48 (RS), D49(E), D46 (D4), D47 (D5), D44 (D6), D45 (D7)
 
-- I2C (SDA: D20, SCL: D21)
-	- IMU (MPU6050, GY-521)
-	- RTC (DS1307)
+- I2C
+	- IMU (MPU6050, GY-521): D20 (SDA), D21 (SCL)
+	- RTC (DS1307): D20 (SDA), D21 (SCL)

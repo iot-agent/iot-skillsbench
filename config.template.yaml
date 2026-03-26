@@ -24,3 +24,5 @@ graph:
   # Options: {skills-llm-generated, skills-human-expert}
   skills_dir: "skills-human-expert"
   enable_diagram: false
+  # If true: auto-apply default pin mapping only when task does NOT already specify pins
+  auto_pin_mapping: false

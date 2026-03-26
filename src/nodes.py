@@ -34,6 +34,7 @@ MODEL_TEMPERATURE = 0.0
 MODEL_API_BASE = "https://openrouter.ai/api/v1"
 MODEL_API_KEY_ENV = "OPENAI_API_KEY"
 SKILLS_DIR = "skills"
+AUTO_PIN_MAPPING = True
 
 
 def configure_registry(skills_dir: str) -> None:
@@ -64,6 +65,12 @@ def configure_model(
     MODEL_API_BASE = api_base
     MODEL_API_KEY_ENV = api_key_env
     get_model.cache_clear()
+
+
+def configure_auto_pin_mapping(enabled: bool = True) -> None:
+    """Configure automatic pin mapping behavior for Arduino tasks."""
+    global AUTO_PIN_MAPPING  # pylint: disable=global-statement
+    AUTO_PIN_MAPPING = enabled
 
 
 @lru_cache(maxsize=1)
@@ -311,6 +318,171 @@ def prepare_workspace_node(state: AgentState) -> dict:
     }
 
 
+def _normalize_text(text: str) -> str:
+    """Normalize text for robust matching."""
+    normalized = re.sub(r"[^a-z0-9\-\s]", " ", text.lower())
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    return normalized
+
+
+def _extract_aliases(peripheral_name: str) -> List[str]:
+    """Generate searchable aliases from a peripheral label in the wiring doc."""
+    aliases = set()
+
+    full = _normalize_text(peripheral_name)
+    if full:
+        aliases.add(full)
+
+    base = _normalize_text(re.sub(r"\(.*?\)", "", peripheral_name))
+    if base:
+        aliases.add(base)
+
+    paren_items = re.findall(r"\((.*?)\)", peripheral_name)
+    for item in paren_items:
+        for part in re.split(r"[,/]", item):
+            alias = _normalize_text(part)
+            if alias:
+                aliases.add(alias)
+
+    model_ids = re.findall(r"[A-Za-z]+(?:-[A-Za-z0-9]+)*\d+[A-Za-z0-9-]*", peripheral_name)
+    for model in model_ids:
+        alias = _normalize_text(model)
+        if alias:
+            aliases.add(alias)
+
+    return sorted(a for a in aliases if len(a) >= 3)
+
+
+def _load_atmega2560_wiring_entries() -> List[dict]:
+    """Load peripheral->pins mapping from docs/atmega2560-arduino-wiring.md."""
+    docs_path = Path(__file__).resolve().parent.parent / "docs" / "atmega2560-arduino-wiring.md"
+    if not docs_path.exists():
+        return []
+
+    content = docs_path.read_text(encoding="utf-8", errors="replace")
+    entries: List[dict] = []
+
+    for line in content.splitlines():
+        match = re.match(r"^\s*-\s+(.+?):\s+(.+?)\s*$", line)
+        if not match:
+            continue
+
+        peripheral = match.group(1).strip()
+        pins_raw = match.group(2).strip()
+        pins = [p.strip() for p in pins_raw.split(",") if p.strip()]
+
+        entries.append({
+            "name": peripheral,
+            "pins": pins,
+            "aliases": _extract_aliases(peripheral),
+        })
+
+    return entries
+
+
+def _has_explicit_pin_mentions(requirements: str) -> bool:
+    """Detect whether the task already specifies explicit board pin names."""
+    # Examples matched: D3, D22, A0, GPIO 3, pin D10, digital pin 12
+    patterns = [
+        r"\b[DA]\d{1,2}\b",
+        r"\bgpio\s*\d{1,2}\b",
+        r"\b(?:digital\s+pin|analog\s+pin|pin)\s*[DA]?\d{1,2}\b",
+    ]
+    text = requirements.lower()
+    return any(re.search(pattern, text) for pattern in patterns)
+
+
+def pin_mapper_node(state: AgentState) -> dict:
+    """
+    Build explicit peripheral-to-pin mapping guidance for Arduino tasks.
+
+    For Arduino framework requests, this node maps peripherals found in
+    requirements to canonical ATmega2560 pins from docs/atmega2560-arduino-wiring.md.
+
+    Writes: pin_mapping_notes, debug_logs
+    """
+    framework = state.get("framework")
+    requirements = state.get("requirements", "")
+
+    if framework != "Arduino":
+        return {"pin_mapping_notes": ""}
+
+    explicit_pins = _has_explicit_pin_mentions(requirements)
+    if AUTO_PIN_MAPPING and explicit_pins:
+        notes = "Task already specifies pin assignments; default pin mapper fallback skipped."
+        debug_log = create_debug_log(
+            node="pin_mapper",
+            input_messages={
+                "framework": framework,
+                "requirements": requirements,
+                "wiring_doc": "docs/atmega2560-arduino-wiring.md",
+            },
+            output={"pin_mapping_notes": notes},
+            duration_ms=0.0,
+            metadata={
+                "deterministic_mapping": True,
+                "rules_source": "docs/atmega2560-arduino-wiring.md",
+                "skipped": True,
+                "skip_reason": "explicit_pins_present",
+                "auto_pin_mapping": AUTO_PIN_MAPPING,
+            },
+        )
+        return {
+            "pin_mapping_notes": notes,
+            "debug_logs": [debug_log],
+        }
+
+    req = _normalize_text(requirements)
+    mapping_rules = _load_atmega2560_wiring_entries()
+
+    selected = []
+    for rule in mapping_rules:
+        aliases = rule.get("aliases", [])
+        if any(alias and alias in req for alias in aliases):
+            selected.append(rule)
+
+    if not selected:
+        notes = (
+            "No known peripheral keywords were detected for ATmega2560 wiring. "
+            "If your task uses peripherals, explicitly map each required signal to the "
+            "pins listed in docs/atmega2560-arduino-wiring.md."
+        )
+    else:
+        lines = [
+            "ATmega2560 REQUIRED PIN MAPPING (from docs/atmega2560-arduino-wiring.md):",
+            "Specify and use every listed pin for each involved peripheral.",
+        ]
+        for item in selected:
+            pin_list = ", ".join(item["pins"])
+            lines.append(f"- {item['name']}: {pin_list}")
+
+        notes = "\n".join(lines)
+
+    debug_log = create_debug_log(
+        node="pin_mapper",
+        input_messages={
+            "framework": framework,
+            "requirements": requirements,
+            "wiring_doc": "docs/atmega2560-arduino-wiring.md",
+        },
+        output={"pin_mapping_notes": notes},
+        duration_ms=0.0,
+        metadata={
+            "deterministic_mapping": True,
+            "rules_source": "docs/atmega2560-arduino-wiring.md",
+            "rules_loaded": len(mapping_rules),
+            "rules_selected": len(selected),
+            "auto_pin_mapping": AUTO_PIN_MAPPING,
+            "explicit_pins_present": explicit_pins,
+        },
+    )
+
+    return {
+        "pin_mapping_notes": notes,
+        "debug_logs": [debug_log],
+    }
+
+
 def coder_node(state: AgentState) -> dict:
     """
     Generate the main code file based on requirements and skill standards.
@@ -321,6 +493,7 @@ def coder_node(state: AgentState) -> dict:
     llm = get_model()
 
     skill_instructions = state.get("active_skill_content") or "No specific standards."
+    pin_mapping_notes = state.get("pin_mapping_notes") or ""
     project_name = state.get("project_name", "embedded_project")
     active_skills = state.get("active_skills", [])
 
@@ -332,13 +505,18 @@ Target Project: {project_name}
 {skill_instructions}
 ============================
 
+=== PIN MAPPING REQUIREMENTS ===
+{pin_mapping_notes}
+================================
+
 Task: Write the main C/C++ code file.
 
 RULES:
 1. Do NOT ask clarifying questions. Make reasonable engineering assumptions.
 2. Output ONLY the code block (inside ```c wrapper).
 3. Include all necessary headers based on the requirements.
-4. Use reasonable GPIO pins if not specified."""
+4. If PIN MAPPING REQUIREMENTS are provided, follow them exactly and include all required pins for each listed peripheral.
+5. Use reasonable GPIO pins only when no pin mapping is provided."""
 
     messages = [("system", system_prompt), ("user", state["requirements"])]
 
