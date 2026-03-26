@@ -23,14 +23,19 @@ To bridge this gap, we introduce a **skills-based agentic framework** and **IoT-
 
 💡 Feel free to build your own tasks by creatively combining hardware components from [this peripheral list](docs/atmega2560-arduino-wiring.md) using the wiring diagram below. Here is one example:
 ```
-Each time the button is pressed, capture a measurement from the MPU6050 unit, and display it on the LCD1602 along with the current timestamp read from the DS1307 real-time clock.
+Set RTC to Mar. 3, 2025 at 14:53:28. 
+Then, start collecting MPU6050 measurements every second.
+Display the MPU6050 results and date/time on LCD1602 every second.
+Also print results to serial.
 ```
 
 ![Demo Mega2560 Combined](docs/assets/atmega2560-arduino-wiring-15-peripherals-annotated.png)
 
 ### Demo #2 (ESP32-S3 + ESP-IDF):
 ```
-Task: "Write the program that will read the password input from the 16-key keypad (password is set to "1234"). If the keypad input matches with the password, the program will connect the relay to unlock the safebox. The program will also display the input password on the LCD1602 display in the format.
+Task: "Write the program that will read the password input from the 16-key keypad (password is set to "1234").
+If the keypad input matches the password, the program will connect the relay to unlock the safebox.
+The program will also display the input password on the LCD1602 display in the format.
 ```
 
 ![Demo ESP-IDF Safebox](docs/assets/demo-esp-idf-safebox.webp)
