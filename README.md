@@ -1,27 +1,59 @@
+<div align="center">
+
 # Skilled AI Agents for Embedded and IoT Systems Development
 
 [![Paper](https://img.shields.io/badge/Paper-ArXiv-red.svg)](https://arxiv.org/abs/2603.19583)
 [![License](https://img.shields.io/badge/license-Apache%202-blue)](LICENSE)
 
-Official codebase for the paper: **"Skilled AI Agents for Embedded and IoT Systems Development"**.
+Official codebase for the paper: **"[Skilled AI Agents for Embedded and IoT Systems Development](https://arxiv.org/abs/2603.19583)"**.
 
-## Overview
+</div>
 
-Large language models (LLMs) and agentic systems show immense promise for automated software development. However, applying them to hardware-in-the-loop (HIL) embedded and IoT systems is notoriously difficult due to the tight coupling between software logic, timing constraints, and physical hardware behavior. Code that compiles successfully often fails on real devices.
+> **At a glance**
+> - An AI agent for build embedded/IoT systems code and applications that run on real hardware in one-shot.
+> - A comprehensive IoT-SkillsBench for systematically evaluating and comparing agent performance with different *skills* levels.
 
-To bridge this gap, we introduce a **skills-based agentic framework** and **IoT-SkillsBench**.
+## 📚 Table of Contents
 
-![System Overview](docs/assets/system-overview.png)
+- [✨ Highlights](#highlights)
+  - [🧪 Demos with Setup #1: Arduino Mega 2560 + Arduino](#demo-setup-1)
+  - [🧪 Demos with Setup #2: ESP32-S3 + ESP-IDF](#demo-setup-2)
+- [🧰 Boards, Frameworks, and Peripherals](#boards-frameworks-peripherals)
+- [🗂️ Repository Structure](#repository-structure)
+- [⚙️ Installation](#installation)
+- [🚀 Quick Start](#quick-start)
+- [🛠️ Configuration](#configuration)
+- [📊 Evaluation](#evaluation)
+- [📚 Citation](#citation)
+- [💬 Contact](#contact)
 
-### Highlights:
+## 📌 Overview
 
-- **IoT-SkillsBench** — A benchmark for evaluating AI agents in real embedded programming environments, spanning 3 platforms, 23 peripherals, and 42 tasks across 3 difficulty levels.
-- **Skills-based agentic framework** — A structured approach to injecting domain knowledge into LLM-based agents for embedded development.
-- **378 hardware-validated experiments** — Each task evaluated under three agent configurations (no-skills, LLM-generated skills, and human-expert skills) and validated through real hardware execution, demonstrating that structured human-expert skills enable near-perfect success rates.
+Large language models (LLMs) and agentic systems show immense promise for automated software development. However, applying them to hardware-in-the-loop (HIL) embedded and IoT systems is notoriously difficult due to the tight coupling between software logic, timing constraints, and physical hardware behavior. Code that compiles successfully often fails on real devices. To bridge this gap, we introduce a **skills-based agentic AI framework for embedded and IoT systems development**, and a comprehensive **IoT-SkillsBench**.
 
-### Demo #1 (Arduino Mega 2560 + Arduino):
+<p align="center">
+  <img src="docs/assets/system-overview.png" alt="Demo Mega2560 Combined" width="75%" />
+</p>
 
-💡 Feel free to build your own tasks by creatively combining hardware components from [this peripheral list](docs/atmega2560-arduino-wiring.md) using the wiring diagram below. Here is one example:
+<a id="highlights"></a>
+
+### ✨ Highlights:
+
+- **A skills-based agentic framework** — A principled approach for injecting structured, domain-specific knowledge into LLM-based agents for reliable embedded and IoT systems development.
+- **IoT-SkillsBench** — A comprehensive benchmark designed to evaluate AI agents in real-world embedded programming settings, spanning 3 platforms, 23 peripherals, and 42 tasks across 3 difficulty levels.
+- **378 hardware-in-the-loop (HIL) experiments** — Each task is evaluated under three agent configurations (no-skills, LLM-generated skills, and human-expert skills) and validated on real, physical hardware, demonstrating that structured human-expert skills achieve near-perfect success rates without reliance on retrieval or long-context reasoning.
+
+<a id="demo-setup-1"></a>
+
+### 🧪 Setup #1: Arduino Mega 2560 + Arduino
+
+💡 Feel free to build your own tasks by creatively combining hardware components from [this peripheral list](docs/atmega2560-arduino-wiring.md) using the wiring diagram below:
+
+<p align="center">
+  <img src="docs/assets/atmega2560-arduino-wiring-15-peripherals-annotated.png" alt="Demo Mega2560 Combined" width="75%" />
+</p>
+
+Example Task #1 (Left):
 ```
 Set RTC to Mar. 3, 2025 at 14:53:28. 
 Then, start collecting MPU6050 measurements every second.
@@ -29,11 +61,37 @@ Display the MPU6050 results and date/time on LCD1602 every second.
 Also print results to serial.
 ```
 
-![Demo Mega2560 Combined](docs/assets/atmega2560-arduino-wiring-15-peripherals-annotated.png)
+Example Task #2 (Right):
+```
+Each time the push button is pressed, capture a measurement from the MPU6050 unit,
+and display it on the LCD1602.
+Also print measurement to Serial.
+```
 
-![Demo Mega2560 Task 1](docs/assets/atmega2560-arduino-demo-task1.mp4)
+<video src="docs/assets/atmega2560-arduino-demo1.mp4" autoplay loop muted playsinline width="49%"></video>
+<video src="docs/assets/atmega2560-arduino-demo2.mp4" autoplay loop muted playsinline width="49%"></video>
 
-### Demo #2 (ESP32-S3 + ESP-IDF):
+Example Task #3 (Left):
+```
+Use the joystick to control laser emitter and passive buzzer.
+The joystick's x-axis controls the on/off of the laser emitter.
+The joystick's y-axis controls the passive buzzer's tone at intervals of 100 Hz.
+```
+
+Example Task #4 (Right):
+```
+Use the ultrasonic distance sensor to measure distance every second.
+If distance is smaller than 1 meter, turn on the laser emitter and passive buzzer.
+Set the passive buzzer tone frequency to be proportional to the measured distance.
+If distance is greater than 1 meter, turn off the laser emitter and passive buzzer.
+```
+
+<video src="docs/assets/atmega2560-arduino-demo3.mp4" autoplay loop muted playsinline width="49%"></video>
+<video src="docs/assets/atmega2560-arduino-demo4.mp4" autoplay loop muted playsinline width="49%"></video>
+
+<a id="demo-setup-2"></a>
+
+### 🧪 Setup #2: ESP32-S3 + ESP-IDF:
 ```
 Task: "Write the program that will read the password input from the 16-key keypad (password is set to "1234").
 If the keypad input matches the password, the program will connect the relay to unlock the safebox.
@@ -42,11 +100,21 @@ The program will also display the input password on the LCD1602 display in the f
 
 ![Demo ESP-IDF Safebox](docs/assets/demo-esp-idf-safebox.webp)
 
+<a id="boards-frameworks-peripherals"></a>
+
+### 🧰 Boards, Frameworks, and Peripherals
+
+For a complete list of supported boards, frameworks, and peripherals coverage, see:
+
+- [docs/boards-peripherals.md](docs/boards-peripherals.md)
+
+This document helps you quickly choose compatible hardware combinations when creating new tasks.
+
 
 ---
 
 
-## Repository Structure
+## 🗂️ Repository Structure
 
 ```
 .
@@ -76,7 +144,7 @@ The program will also display the input password on the LCD1602 display in the f
 
 ---
 
-## Installation
+## ⚙️ Installation
 
 **Prerequisites:** Python 3.9+
 
@@ -117,35 +185,34 @@ Hardware-in-the-loop evaluation additionally requires a supported board and the 
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 After completing the [Installation](#installation) steps, run a task:
 
-**Single task run (`tasks/single/tmp_task.txt`):**
+### Single task run (`tasks/single/tmp_task.txt`):
 
 ```bash
 python scripts/run_task_single.py -o scripts/tmp_output
 ```
 
-**Batch run (benchmark file + task id):**
+### Batch run (benchmark file + task id):
 
 ```bash
 python scripts/batch_run.py -i tasks/level3/level3-ATmega2560-Arduino.txt -t Safe_Box_with_display
 ```
 
-Output is written to:
-
+Output is written to：
 ```
 output/tasks-{board}-{framework}/w_skills_{skills_dir}/{model.name}/{task_id}/
 ```
 
 ---
 
-## Configuration
+## 🛠️ Configuration
 
 All settings are controlled through `config.yaml`, created by copying `config.template.yaml` (see [Installation](#installation)).
 
-### Skills
+### 🧩 Skills
 
 Enable or disable skill injection, and select the skill set:
 
@@ -153,9 +220,18 @@ Enable or disable skill injection, and select the skill set:
 graph:
   use_skills: true
   skills_dir: skills-human-expert/   # or skills-llm-generated/
+  auto_pin_mapping: true             # Arduino only; uses default pin map if task does not specify pins
 ```
 
-### Board and Framework
+### 🧠 Graph Options
+
+| Key | Type | Description |
+|---|---|---|
+| `use_skills` | `bool` | Enable skill injection during planning/coding. |
+| `skills_dir` | `str` | Skill set directory (`skills-human-expert` or `skills-llm-generated`). |
+| `auto_pin_mapping` | `bool` | If `true`, include `pin_mapper` fallback when Arduino task omits pin assignments. |
+
+### 🧱 Board and Framework
 
 Select the target embedded platform:
 
@@ -173,7 +249,7 @@ Supported combinations:
 | `arduino_mega_2560`    | Arduino   |
 | `arduino_nano_33_ble`  | Zephyr    |
 
-### Model
+### 🤖 Model
 
 Specify the LLM used for code generation:
 
@@ -182,7 +258,7 @@ model:
   name: "claude-sonnet-4-5"
 ```
 
-### Expected Run Outputs
+### 📦 Expected Run Outputs
 
 Each run creates:
 
@@ -193,9 +269,9 @@ Each run creates:
 
 ---
 
-## Evaluation
+## 📊 Evaluation
 
-### Build and Flash
+### 🔌 Build and Flash
 
 After code generation, the output must be compiled and flashed to the target board using the platform's native toolchain. Please refer to each platform's official documentation for detailed setup and usage:
 
@@ -215,7 +291,7 @@ arduino-cli monitor -p /dev/cu.usbmodemxxxx --config 115200
 
 For Arduino targets, an automated compile-and-retry script is also available — see `scripts/auto_test.py`.
 
-### Token Usage
+### 🧮 Token Usage
 
 Each run produces a `metadata.json` in the output directory with per-node and aggregate token counts:
 
@@ -237,7 +313,17 @@ Token tracking is implemented using [`AIMessage`](https://reference.langchain.co
 
 ---
 
-## Citation
+## 🩺 Troubleshooting
+
+- **Missing API key error**: confirm `.env` contains `OPENROUTER_API_KEY` and matches `model.api_key_env`.
+- **No serial port detected**: verify cable, board selection, and port permissions.
+- **Build toolchain issues**: install the matching framework toolchain (ESP-IDF / Arduino CLI / Zephyr).
+- **Unexpected pin choices on Arduino**: set `graph.auto_pin_mapping: true` and avoid conflicting pin constraints in task text.
+- **Output path confusion**: generated artifacts are under `output/` (not `outputs/`).
+
+---
+
+## 📚 Citation
 
 If you use this code or benchmark in your research, please cite:
 
@@ -252,13 +338,13 @@ If you use this code or benchmark in your research, please cite:
 
 ---
 
-## License
+## 📄 License
 
 This project is released under the [Apache 2.0 License](LICENSE).
 
 ---
 
-## Contact
+## 💬 Contact
 
 We welcome feedback, collaboration, and contributions.
 
