@@ -31,6 +31,8 @@ Also print results to serial.
 
 ![Demo Mega2560 Combined](docs/assets/atmega2560-arduino-wiring-15-peripherals-annotated.png)
 
+![Demo Mega2560 Task 1](docs/assets/atmega2560-arduino-demo-task1.mp4)
+
 ### Demo #2 (ESP32-S3 + ESP-IDF):
 ```
 Task: "Write the program that will read the password input from the 16-key keypad (password is set to "1234").
