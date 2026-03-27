@@ -68,8 +68,8 @@ and display it on the LCD1602.
 Also print measurement to Serial.
 ```
 
-<video src="docs/assets/atmega2560-arduino-demo1.mp4" autoplay loop muted playsinline width="49%"></video>
-<video src="docs/assets/atmega2560-arduino-demo2.mp4" autoplay loop muted playsinline width="49%"></video>
+<video src="https://github.com/iot-agent/iot-skillsbench/blob/main/docs/assets/atmega2560-arduino-demo1.mp4" autoplay loop muted playsinline width="49%"></video>
+<video src="https://github.com/iot-agent/iot-skillsbench/blob/main/docs/assets/atmega2560-arduino-demo2.mp4" autoplay loop muted playsinline width="49%"></video>
 
 Example Task #3 (Left):
 ```
@@ -86,8 +86,8 @@ Set the passive buzzer tone frequency to be proportional to the measured distanc
 If distance is greater than 1 meter, turn off the laser emitter and passive buzzer.
 ```
 
-<video src="docs/assets/atmega2560-arduino-demo3.mp4" autoplay loop muted playsinline width="49%"></video>
-<video src="docs/assets/atmega2560-arduino-demo4.mp4" autoplay loop muted playsinline width="49%"></video>
+<video src="https://github.com/iot-agent/iot-skillsbench/blob/main/docs/assets/atmega2560-arduino-demo3.mp4" autoplay loop muted playsinline width="49%"></video>
+<video src="https://github.com/iot-agent/iot-skillsbench/blob/main/docs/assets/atmega2560-arduino-demo4.mp4" autoplay loop muted playsinline width="49%"></video>
 
 <a id="demo-setup-2"></a>
 
