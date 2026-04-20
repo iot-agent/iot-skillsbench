@@ -9,11 +9,12 @@
 	- Passive buzzer: D7
 	- Laser emitter (KY-008): D24
 
-- Human input / simple digital sensors
+- Human inputs / simple digital sensors
 	- Push button: D10 
 	- Temperature & humidity sensor (DHT11): D8
 	- Sound sensor digital output (KY-037): D3 (with Interrupt)
 	- Ultrasonic distance sensor (HC-SR04): D23 (TRIG), D22 (ECHO)
+	- Rotary encoder (KY-040): D26 (CLK), D27 (DT)
 
 - Analog inputs
 	- Temperature sensor (TMP36): A0
