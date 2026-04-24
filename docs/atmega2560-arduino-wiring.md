@@ -21,6 +21,7 @@
 	- Sound sensor analog output (KY-037): A1
 	- Photoresistor light sensor (KY-018): A2
 	- Joystick (KY-023): A3 (x-axis), A4 (y-axis)
+	- Gas sensor analog output (MQ2): A5
 
 - Display
 	- LCD1602 (4-bit mode): D48 (RS), D49(E), D46 (D4), D47 (D5), D44 (D6), D45 (D7)
