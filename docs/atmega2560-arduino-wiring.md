@@ -29,3 +29,4 @@
 - I2C
 	- IMU (MPU6050, GY-521): D20 (SDA), D21 (SCL)
 	- RTC (DS1307): D20 (SDA), D21 (SCL)
+	- Barometric Pressure Sensor (BMP180): D20 (SDA), D21 (SCL)
