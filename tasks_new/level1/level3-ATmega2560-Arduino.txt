@@ -73,7 +73,7 @@ Parse GPS location data, compare against a predefined geographic region, trigger
 
 
 [SGP40_VOC_Index_Algorithm]
-Implement the VOC index calculation using raw SGP40 Air Quality Sensor measurements, and print both raw_voc=<value> and voc_index=<value> to the serial console once per second.
+Initialize the SGP40 Air Quality Sensor, read the raw VOC measurement once per second, implement the VOC index calculation, and print both raw_voc=<value> and voc_index=<value> to the serial console.
 
 
 [PN532_Tag_Authentication_and_Block_Read]

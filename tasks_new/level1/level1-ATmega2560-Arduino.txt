@@ -1,4 +1,4 @@
-[Speaker Toggle]
+[Speaker_Toggle]
 Toggle the speaker output on and off every second, and print speaker on / speaker off over serial.
 
 
@@ -26,5 +26,5 @@ Use the Fingerprint Sensor to continuously scans for a finger and, upon detectio
 [fingerprint_delete]
 Using the Fingerprint Sensor, prompts the user for a specific ID number and permanently removes that fingerprint template from the sensor's onboard storage.
 
-[Fingerprint Sensor LED Control]
+[Fingerprint_Sensor_LED_Control]
 Turn the fingerprint sensor LED on for one second and off for one second repeatedly.
