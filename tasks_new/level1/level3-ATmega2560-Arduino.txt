@@ -1,0 +1,96 @@
+[Air_Quality_Monitoring_Station]
+Read (1) PM2.5 data from PMSA003I Air Quality Sensor and (2) VOC data from SGP40 Air Quality Sensor, compute a simple air quality index, and print pm2_5=<value>, voc=<value>, aqi=<value>, log=<ok/fail> to the serial console once per second.
+
+
+[LCD1602_Air_Quality_Warning_Panel]
+Monitor (1) PM2.5 data from PMSA003I Air Quality Sensor and (2) VOC data from SGP40 Air Quality Sensor, display the current air-quality status on the LCD1602, enter a warning state when either value exceeds a threshold, blink the LCD backlight while in warning state.
+
+
+[LCD1602_GPS_Status]
+Read NMEA data from Ultimate GPS, display the latest valid latitude and longitude on the LCD1602.
+
+
+[LCD1602_GPS_Status_and_Logger]
+Read NMEA data from Ultimate GPS, display the latest valid latitude and longitude on the LCD1602, log valid coordinates to the SD card.
+
+
+[LCD1602_Biometric_Access_Display]
+Use the fingerprint sensor to authenticate a user, display Access Granted or Access Denied on the LCD1602, unlock a relay only on success.
+
+
+[LCD1602_Smart_Power_Monitor]
+Read voltage and current from INA219, compute power consumption, display live power information on the LCD1602, enter an alert state when current exceeds a safe limit.
+
+
+[Smart_UV_Alert_System]
+Continuously read UV data from LTR390 UV Light Sensor, enter an alert state when UV exceeds a threshold, blink the LED while in alert state, clear the alert only after UV remains below the threshold for a fixed time, and print uv=<value>, alert=<on/off>to the serial console.
+
+
+[GPS_Data_Logger]
+Parse GPS latitude and longitude from NMEA data, log each valid position with timestamp (read from DS1307 RTC Module) to SD card, and print to the serial console.
+
+
+[Biometric_Access_System]
+Use the fingerprint sensor to detect and verify a fingerprint, unlock a relay when authentication succeeds, and print to the serial console.
+
+
+[NFC_Door_Lock]
+Detect NFC tags using PN532 NFC/RFID controller, compare the UID against a stored authorized list, unlock a relay if matched, and print to the serial console.
+
+
+[Power_Monitoring_System]
+Read voltage and current from INA219, compute power consumption, log data to SD card, and print to the serial console.
+
+
+[Multi_Sensor_Dashboard]
+Collect measurements from VL53L0X Time of Flight Distance Sensor, LTR390 UV Light Sensor, and SGP40 Air Quality Sensor at different sampling intervals, aggregate the latest values into a single dashboard output once per second, and print distance=<value>, uv=<value>, voc=<value>, status=<ok> to the serial console.
+
+
+[Gesture_Based_Trigger]
+Use VL53L0X Time of Flight Distance Sensor to detect a hand-swipe gesture by tracking rapid distance changes, toggle an output state when a gesture is detected, and print gesture=<detected/none>, output=<on/off> to the serial console.
+
+
+[Real_Time_Air_Quality_Alarm]
+Continuously monitor PM2.5 from PMSA003I, enter an alarm state when PM2.5 exceeds a threshold, keep the alarm active until the value returns to safe levels for a fixed duration, and print pm2_5=<value>, alarm=<on/off> to the serial console.
+
+
+[Wearable_Health_Device]
+Read heart-rate data continuously from Pulse Oximeter and Heart Rate Sensor MAX30101 & MAX32664, detect abnormal values over a rolling time window, trigger a buzzer when abnormal values persist, and print heart_rate=<value>, alert=<on/off> to the serial console.
+
+
+[Smart_Safe_Box_with_NFC_and_Fingerprint]
+Use Adafruit PN532 NFC/RFID controller to read NFC tag and fingerprint sensor to read fingerprint. Require both a valid NFC tag and a matching fingerprint to unlock the relay, and print nfc=<ok/fail>, fingerprint=<ok/fail>, unlock=<yes/no> to the serial console.
+PN532: (IRQ: 22, RESET: 23)
+Fingerprint: (RX: 18, TX: 19)
+
+
+[Energy_Usage_Alert_System]
+Monitor current using INA219, enter an alert state when current exceeds a safe threshold, clear the alert only after the current remains normal for a fixed duration, and print current=<value>, alert=<on/off> to the serial console.
+
+
+[Location_Based_Reminder]
+Parse GPS location data, compare against a predefined geographic region, trigger an alert when entering the region, and print lat=<value>, lon=<value>, inside_region=<yes/no> to the serial console.
+
+
+[SGP40_VOC_Index_Algorithm]
+Initialize the SGP40 Air Quality Sensor, read the raw VOC measurement once per second, implement the VOC index calculation, and print both raw_voc=<value> and voc_index=<value> to the serial console.
+
+
+[PN532_Tag_Authentication_and_Block_Read]
+Authenticate an NFC card block using the PN532 NFC/RFID controller, read the block data after successful authentication, and print auth=<ok/fail>, block_data=<hex bytes> to the serial console.
+
+
+[SD_Card_File_Write_Read_Append]
+Create a text file on the SD card (128GB microSDXC card (exFAT)), write initial content “hello world”, append additional line “iot-skillsbench” without overwriting, read the file back, and print the full file content to the serial console.
+
+
+[Smart_Health_and_Environment_Monitoring_Station]
+Develop a monitoring system that concurrently tracks human vitals and ambient air quality. The program must poll the Pulse Oximeter and Heart Rate Sensor MAX30101 & MAX32664 via I2C to obtain heart rate and SpO2 levels while simultaneously calculating the VOC Index from the SGP40 Air Quality Sensor. Implement a "Warning Mode" where if the VOC Index exceeds a specific threshold or the heart rate drops below a set value, the LCD1602 background backlight flashes and displays a high-priority alert message.
+
+
+[Secure_Asset_Tracker_with_eInk_Logging]
+Create a secure logging system for mobile assets. The system remains in a low-power "Locked" state until a valid NFC tag is scanned via the PN532 NFC/RFID controller. Upon successful authentication, the system must trigger a UART interrupt to parse the latest GPRMC sentence from the GPS module. The current coordinates, timestamp, and authorized user ID must then be rendered onto the eInk Display, utilizing the SRAM buffer to ensure the image is correctly updated before the system returns to sleep.
+
+
+[Biometric_Safe_with_Power_Analytics_and_Audit_Trail]
+Build a high-security vault controller. The system must wait for a Fingerprint Sensor match. Upon a successful "Level 1" match, the program activates a Relay to unlock the door. While the relay is active, use the INA219 to monitor the current draw of the locking mechanism to detect mechanical jams (indicated by a current spike). Every access attempt—including the fingerprint ID, the timestamp (if available), and the peak current measured during the operation—must be appended to a .log file on the Micro SD Card using the SPI bus.

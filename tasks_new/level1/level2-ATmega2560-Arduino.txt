@@ -1,0 +1,66 @@
+[ToF_Continuous_Ranging]
+Initialize the VL53L0X Time of Flight Distance Sensor over I2C, start continuous ranging, read the distance in millimeters once per second, and print to the serial console.
+
+
+[ToF_Single_Shot_Measurement_Mode]
+Configure the VL53L0X Time of Flight Distance Sensor to operate in single-shot mode, trigger a measurement manually every second, read the distance in millimeters, and print to the serial console.
+
+
+[ToF_Advanced_Measurement_Control]
+Configure the VL53L0X Time of Flight Distance Sensor timing budget and measurement interval, read both the range status and distance, and print status and distance to the serial console for each measurement.
+
+
+[INA219_Power_Calculation]
+Read voltage and current from INA219 High Side DC Current Sensor and compute power consumption, and print “Voltage: %.1f V, Current: %d mA, Power: %.1f mW” to serial.
+
+
+[UV_Light_Sensor_Single_Mode_Reading]
+Initialize the LTR390 UV Light Sensor in ALS mode, read the measurement value every 2 seconds, and print “UV: %d, AL: %d” to the serial console.
+
+
+[UV_Light_Sensor_Mode_Switching_Readout]
+Alternate the LTR390 UV Light Sensor between ALS mode and UV mode every 3 seconds, read the corresponding value after each switch, and print mode and value to the serial console.
+
+
+[SGP40_Air_Quality_Sensor_Raw_Measurement]
+Initialize the SGP40 Air Quality Sensor, read the raw VOC measurement once per second, and print to the serial console.
+
+
+[SGP40_Air_Quality_Sensor_Humidity_Compensated_Read]
+Send a humidity-compensated measurement command to the SGP40 Air Quality Sensor, read the raw response, and print to the serial console.
+
+
+[SGP40_Air_Quality_Sensor_Command_Timing_Validation]
+Send measurement commands to the SGP40 Air Quality Sensor at fixed intervals, ensure proper timing between commands, and print measurement_interval=<ms>, raw_voc=<value> to the serial console.
+
+
+[PMSA003I_Air_Quality_Sensor_Frame_Parsing]
+Read PMSA003I Air Quality Sensor data from I2C, parse the frame fields, extract PM1.0, PM2.5, and PM10 values, and print to the serial console.
+
+
+[PMSA003I_Air_Quality_Sensor_Frame_Integrity_Check]
+Read PMSA003I Air Quality Sensor data from I2C, verify frame integrity using checksum, and print checksum=<ok/fail>, pm2_5=<value> to the serial console.
+
+
+[NFC_RFID_I2C_UID_Read]
+Initialize the Adafruit PN532 NFC/RFID controller over I2C, detect an NFC tag, read its UID, and print to the serial console.
+
+
+[NFC_RFID_SPI_UID_Read]
+Configure the Adaruit PN532 NFC/RFID controller for SPI communication, detect an NFC tag, read its UID, and print to the serial console.
+
+
+[GPS_Latitude_Longitude_Parsing]
+Read Ultimate GPS NMEA sentences from UART, parse latitude and longitude from valid position messages, and print to the serial console.
+
+
+[Pulse_Oximeter_and_Heart_Rate_Sensor_Read]
+Initialize the Pulse Oximeter and Heart Rate Sensor MAX30101 & MAX32664 over I2C, read raw IR and red LED sensor values periodically, and print to the serial console.
+
+
+[Fingerprint_Sensor_UART_Protocol]
+Send a command packet to the fingerprint sensor over UART, read the response packet, and print command=<id>, response=<status/data> to the serial console.
+
+
+[SD_Card_SPI_Initialization]
+Initialize the SD card (128GB microSDXC card (exFAT)) over SPI, identify the card type, and print sd_init=<ok/fail>, card_type=<type> to the serial console.

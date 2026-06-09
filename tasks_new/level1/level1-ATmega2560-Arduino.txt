@@ -1,0 +1,30 @@
+[Speaker_Toggle]
+Toggle the speaker output on and off every second, and print speaker on / speaker off over serial.
+
+
+[ToF_Threshold_Alert]
+Monitor the VL53L0X Time of Flight Distance Sensor via I2C. If the measured distance is less than 100 mm, print “Distance < 100 mm” to serial.
+
+
+[GPS_NMEA_Output]
+Read raw NMEA sentences from the Ultimate GPS module and forward them directly to the serial monitor.
+
+
+[GPS_Raw_Data_Filter]
+Read the Ultimate GPS stream and only forward $GPGGA sentences to the serial monitor.
+
+
+[GPS_Fix_Status]
+Monitor incoming NMEA data from Ultimate GPS and print fix valid or fix invalid over serial based on the fix field.
+
+[fingerprint_enroll]
+Guides the user through a scanning process of the Fingerprint Sensor to capture and save a new fingerprint template into a specific ID slot in the sensor's memory.
+
+[fingerprint_match]
+Use the Fingerprint Sensor to continuously scans for a finger and, upon detection, compares the print against the stored database to return a matching ID and confidence level.
+
+[fingerprint_delete]
+Using the Fingerprint Sensor, prompts the user for a specific ID number and permanently removes that fingerprint template from the sensor's onboard storage.
+
+[Fingerprint_Sensor_LED_Control]
+Turn the fingerprint sensor LED on for one second and off for one second repeatedly.
