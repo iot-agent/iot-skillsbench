@@ -13,18 +13,41 @@ This directory contains modular skill documents generated from analyzing the tas
 - `adc-reading-esp32-esp-idf.md` - ADC configuration, calibration, and sensor reading
 - `pwm-control-esp32-esp-idf.md` - PWM generation using LEDC peripheral
 - `i2c-communication-esp32-esp-idf.md` - I2C master communication with sensors
+- `uart-communication-esp32-esp-idf.md` - UART setup, line reading, binary packet protocols
+- `spi-communication-esp32-esp-idf.md` - SPI master, multi-device, DMA transfers
 
 #### ATMega2560 + Arduino
 - `gpio-interrupts-atmega2560-arduino.md` - Hardware interrupts on specific pins
-- (Additional Arduino-specific skills can be created as needed)
+- `i2c-communication-atmega2560-arduino.md` - Wire library, register read/write patterns
+- `uart-communication-atmega2560-arduino.md` - Hardware serial ports (Serial1-3), line/packet reading
+- `spi-communication-atmega2560-arduino.md` - SPI library, multi-device chip select
 
 #### nRF52840 + Zephyr RTOS
 - `gpio-and-timers-nrf52840-zephyr.md` - GPIO control, interrupts, and timer usage with device tree
+- `i2c-communication-nrf52840-zephyr.md` - Zephyr I2C driver API, DTS configuration
+- `uart-communication-nrf52840-zephyr.md` - Polling and interrupt-driven UART, line buffering
+- `spi-communication-nrf52840-zephyr.md` - Zephyr SPI driver API, scatter-gather transfers
 
 ### Generic/Cross-Platform Skills
 - `software-debouncing-pattern.md` - Button debouncing techniques (applicable to all platforms)
 - `matrix-keypad-scanning-generic.md` - 4x4 matrix keypad scanning algorithm
 - `ultrasonic-hcsr04-generic.md` - HC-SR04 ultrasonic distance measurement
+
+### Sensor and Device Skills (All Platforms)
+- `vl53l0x-tof-sensor.md` - VL53L0X ToF distance sensor (I2C, all platforms + gesture detection)
+- `gps-nmea-uart.md` - PA1616S GPS NMEA parsing, lat/lon, fix status (all platforms)
+- `fingerprint-sensor-uart.md` - R307/AS608 fingerprint sensor UART protocol, enroll/match/delete
+- `ina219-power-sensor.md` - INA219 voltage/current/power monitor (I2C, all platforms)
+- `ltr390-uv-sensor.md` - LTR390 UV/ALS sensor, mode switching, alert (I2C, all platforms)
+- `sgp40-voc-sensor.md` - SGP40 VOC sensor, CRC, humidity compensation, VOC index (I2C, all platforms)
+- `pmsa003i-air-quality.md` - PMSA003I PM1.0/PM2.5/PM10 frame parsing, checksum, AQI (I2C, all platforms)
+- `pn532-nfc-rfid.md` - PN532 NFC/RFID UID read, MIFARE auth/block read, door lock (I2C+SPI, all platforms)
+- `max30101-heart-rate.md` - MAX30101+MAX32664 heart rate/SpO2, FIFO reading, alert (I2C, all platforms)
+- `microsd-spi.md` - MicroSD SPI init, file create/read/append, GPS/power logging (all platforms)
+- `lcd1602-i2c.md` - LCD1602 PCF8574 I2C backpack, text display, backlight blink, alerts (all platforms)
+- `ds1307-rtc.md` - DS1307 RTC date/time read/write, BCD conversion, timestamp (I2C, all platforms)
+- `relay-gpio-control.md` - Relay GPIO control, active-high/low, timed unlock, access control
+- `speaker-buzzer-output.md` - Active/passive buzzer, GPIO toggle, PWM tone, non-blocking alert
 
 ## Skills Summary
 
