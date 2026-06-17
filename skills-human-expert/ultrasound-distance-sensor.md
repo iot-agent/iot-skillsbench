@@ -3,6 +3,16 @@ name: Ultrasound Distance Sensor
 description: HC-SR04 ultrasound sensor for distance measurement
 ---
 
+## Pinout
+
+| Name | Description |
+|---|---|
+| GND | Ground |
+| VCC | Voltage supply |
+| SDA | I2C data line |
+| SCL | I2C clock line |
+| SQW | Optional square wave output |
+
 ## Operation
 
 - Drive the **TRIG** pin with a 10 microseconds HIGH pulse to initiate a measurement.
