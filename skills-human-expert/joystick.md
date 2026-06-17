@@ -1,6 +1,6 @@
 ---
 name: Joystick
-description: KY-023 2-axis analog joystick module.
+description: A 2-axis analog joystick module (KY-023).
 ---
 
 ## Pinout

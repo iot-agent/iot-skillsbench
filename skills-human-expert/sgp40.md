@@ -1,6 +1,6 @@
 ---
 name: SGP40
-description: A digital VOC (volatile organic compounds) sensor.
+description: A digital VOC (volatile organic compounds) sensor
 ---
 
 ## Operation
