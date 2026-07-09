@@ -37,6 +37,12 @@ Key points:
 
 - Use a default baud rate of `baud=115200` for serial console unless otherwise mentioned.
 
+## UART
+
+- To interface with sensors with UART protocols, prefer to use hardware serial if available. Arduino Mega 2560 have three hardware serial (Serial1, Serial2 and Serial3).
+  - Serial1 uses D18 (TX1) and D19 (RX1). Serial2 uses D16 (TX2) and D17 (RX2). Serial3 uses D14 (TX3) and D13 (RX3).
+  - TX pin on Arduino Mega 2560 refers to data from host to peripherial. It should be connected to peripherial's data in / RX. Vise versa, RX on Arduino connects to TX (data out) on peripherial.
+
 ### Usage
 `setCursor()`: Positions the LCD cursor and defines where the next printed character will appear.
 Syntax: `lcd.setCursor(column, row);`
