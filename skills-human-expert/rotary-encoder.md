@@ -1,6 +1,6 @@
 ---
 name: Rotary Encoder
-description: A incremental rotary encoder module that provides 360-degree rotational input and direction tracking with an integrated push-button switch (KY-040).
+description: An incremental rotary encoder module that provides 360-degree rotational input and direction tracking with an integrated push-button switch (KY-040).
 ---
 
 ## Pinout

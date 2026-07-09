@@ -14,7 +14,7 @@ description: A digital sensor for temperature and relative humidity (RH).
 
 ## Operation
 
-- DHT11 communicates via a **singe-wire** **half-duplex** interface. It is powered from 3.3V to 5V and outputs 40 bits per read. Minimum interval between reads is **2 seconds**.
+- DHT11 communicates via a **single-wire** **half-duplex** interface. It is powered from 3.3V to 5V and outputs 40 bits per read. Minimum interval between reads is **2 seconds**.
 
 - Attributes and detection range: 
     - **Temperature range**: 0°C to 50°C;
