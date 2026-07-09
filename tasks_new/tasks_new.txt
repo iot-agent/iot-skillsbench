@@ -1,0 +1,197 @@
+[Speaker_Toggle]
+Toggle the speaker output on and off every second, and print speaker on / speaker off over serial.
+
+
+[ToF_Threshold_Alert]
+Monitor the VL53L0X Time of Flight Distance Sensor via I2C. If the measured distance is less than 100 mm, print “Distance < 100 mm” to serial.
+
+
+[GPS_NMEA_Output]
+Read raw NMEA sentences from the Ultimate GPS module and forward them directly to the serial monitor.
+
+
+[GPS_Raw_Data_Filter]
+Read the Ultimate GPS stream and only forward $GPGGA sentences to the serial monitor.
+
+
+[GPS_Fix_Status]
+Monitor incoming NMEA data from Ultimate GPS and print fix valid or fix invalid over serial based on the fix field.
+
+[fingerprint_enroll]
+Guides the user through a scanning process of the Fingerprint Sensor to capture and save a new fingerprint template into a specific ID slot in the sensor's memory.
+
+[fingerprint_match]
+Use the Fingerprint Sensor to continuously scans for a finger and, upon detection, compares the print against the stored database to return a matching ID and confidence level.
+
+[fingerprint_delete]
+Using the Fingerprint Sensor, prompts the user for a specific ID number and permanently removes that fingerprint template from the sensor's onboard storage.
+
+
+[Fingerprint_Sensor_LED_Control]
+Turn the fingerprint sensor LED on for one second and off for one second repeatedly.
+
+
+[ToF_Continuous_Ranging]
+Initialize the VL53L0X Time of Flight Distance Sensor over I2C, start continuous ranging, read the distance in millimeters once per second, and print to the serial console.
+
+
+[ToF_Single_Shot_Measurement_Mode]
+Configure the VL53L0X Time of Flight Distance Sensor to operate in single-shot mode, trigger a measurement manually every second, read the distance in millimeters, and print to the serial console.
+
+
+[ToF_Advanced_Measurement_Control]
+Configure the VL53L0X Time of Flight Distance Sensor timing budget and measurement interval, read both the range status and distance, and print status and distance to the serial console for each measurement.
+
+
+[INA219_Power_Calculation]
+Read voltage and current from INA219 High Side DC Current Sensor and compute power consumption, and print “Voltage: %.1f V, Current: %d mA, Power: %.1f mW” to serial.
+
+
+[UV_Light_Sensor_Single_Mode_Reading]
+Initialize the LTR390 UV Light Sensor in ALS mode, read the measurement value every 2 seconds, and print “UV: %d, AL: %d” to the serial console.
+
+
+[UV_Light_Sensor_Mode_Switching_Readout]
+Alternate the LTR390 UV Light Sensor between ALS mode and UV mode every 3 seconds, read the corresponding value after each switch, and print mode and value to the serial console.
+
+
+[SGP40_Air_Quality_Sensor_Raw_Measurement]
+Initialize the SGP40 Air Quality Sensor, read the raw VOC measurement once per second, and print to the serial console.
+
+
+[SGP40_Air_Quality_Sensor_Humidity_Compensated_Read]
+Send a humidity-compensated measurement command to the SGP40 Air Quality Sensor, read the raw response, and print to the serial console.
+
+
+[SGP40_Air_Quality_Sensor_Command_Timing_Validation]
+Send measurement commands to the SGP40 Air Quality Sensor at fixed intervals, ensure proper timing between commands, and print measurement_interval=<ms>, raw_voc=<value> to the serial console.
+
+
+[PMSA003I_Air_Quality_Sensor_Frame_Parsing]
+Read PMSA003I Air Quality Sensor data from I2C, parse the frame fields, extract PM1.0, PM2.5, and PM10 values, and print to the serial console.
+
+
+[PMSA003I_Air_Quality_Sensor_Frame_Integrity_Check]
+Read PMSA003I Air Quality Sensor data from I2C, verify frame integrity using checksum, and print checksum=<ok/fail>, pm2_5=<value> to the serial console.
+
+
+[NFC_RFID_I2C_UID_Read]
+Initialize the Adafruit PN532 NFC/RFID controller over I2C, detect an NFC tag, read its UID, and print to the serial console.
+
+
+[NFC_RFID_SPI_UID_Read]
+Configure the Adaruit PN532 NFC/RFID controller for SPI communication, detect an NFC tag, read its UID, and print to the serial console.
+
+
+[GPS_Latitude_Longitude_Parsing]
+Read Ultimate GPS NMEA sentences from UART, parse latitude and longitude from valid position messages, and print to the serial console.
+
+
+[Pulse_Oximeter_and_Heart_Rate_Sensor_Read]
+Initialize the Pulse Oximeter and Heart Rate Sensor MAX30101 & MAX32664 over I2C, read raw IR and red LED sensor values periodically, and print to the serial console.
+
+
+[Fingerprint_Sensor_UART_Protocol]
+Send a command packet to the fingerprint sensor over UART, read the response packet, and print command=<id>, response=<status/data> to the serial console.
+
+
+[SD_Card_SPI_Initialization]
+Initialize the SD card (128GB microSDXC card (exFAT)) over SPI, identify the card type, and print sd_init=<ok/fail>, card_type=<type> to the serial console.
+
+
+[Air_Quality_Monitoring_Station]
+Read (1) PM2.5 data from PMSA003I Air Quality Sensor and (2) VOC data from SGP40 Air Quality Sensor, compute a simple air quality index, and print pm2_5=<value>, voc=<value>, aqi=<value>, log=<ok/fail> to the serial console once per second.
+
+
+[LCD1602_Air_Quality_Warning_Panel]
+Monitor (1) PM2.5 data from PMSA003I Air Quality Sensor and (2) VOC data from SGP40 Air Quality Sensor, display the current air-quality status on the LCD1602, enter a warning state when either value exceeds a threshold, blink the LCD backlight while in warning state.
+
+
+[LCD1602_GPS_Status]
+Read NMEA data from Ultimate GPS, display the latest valid latitude and longitude on the LCD1602.
+
+
+[LCD1602_GPS_Status_and_Logger]
+Read NMEA data from Ultimate GPS, display the latest valid latitude and longitude on the LCD1602, log valid coordinates to the SD card.
+
+
+[LCD1602_Biometric_Access_Display]
+Use the fingerprint sensor to authenticate a user, display Access Granted or Access Denied on the LCD1602, unlock a relay only on success.
+
+
+[LCD1602_Smart_Power_Monitor]
+Read voltage and current from INA219, compute power consumption, display live power information on the LCD1602, enter an alert state when current exceeds a safe limit.
+
+
+[Smart_UV_Alert_System]
+Continuously read UV data from LTR390 UV Light Sensor, enter an alert state when UV exceeds a threshold, blink the LED while in alert state, clear the alert only after UV remains below the threshold for a fixed time, and print uv=<value>, alert=<on/off>to the serial console.
+
+
+[GPS_Data_Logger]
+Parse GPS latitude and longitude from NMEA data, log each valid position with timestamp (read from DS1307 RTC Module) to SD card, and print to the serial console.
+
+
+[Biometric_Access_System]
+Use the fingerprint sensor to detect and verify a fingerprint, unlock a relay when authentication succeeds, and print to the serial console.
+
+
+[NFC_Door_Lock]
+Detect NFC tags using PN532 NFC/RFID controller, compare the UID against a stored authorized list, unlock a relay if matched, and print to the serial console.
+
+
+[Power_Monitoring_System]
+Read voltage and current from INA219, compute power consumption, log data to SD card, and print to the serial console.
+
+
+[Multi_Sensor_Dashboard]
+Collect measurements from VL53L0X Time of Flight Distance Sensor, LTR390 UV Light Sensor, and SGP40 Air Quality Sensor at different sampling intervals, aggregate the latest values into a single dashboard output once per second, and print distance=<value>, uv=<value>, voc=<value>, status=<ok> to the serial console.
+
+
+[Gesture_Based_Trigger]
+Use VL53L0X Time of Flight Distance Sensor to detect a hand-swipe gesture by tracking rapid distance changes, toggle an output state when a gesture is detected, and print gesture=<detected/none>, output=<on/off> to the serial console.
+
+
+[Real_Time_Air_Quality_Alarm]
+Continuously monitor PM2.5 from PMSA003I, enter an alarm state when PM2.5 exceeds a threshold, keep the alarm active until the value returns to safe levels for a fixed duration, and print pm2_5=<value>, alarm=<on/off> to the serial console.
+
+
+[Wearable_Health_Device]
+Read heart-rate data continuously from Pulse Oximeter and Heart Rate Sensor MAX30101 & MAX32664, detect abnormal values over a rolling time window, trigger a buzzer when abnormal values persist, and print heart_rate=<value>, alert=<on/off> to the serial console.
+
+
+[Smart_Safe_Box_with_NFC_and_Fingerprint]
+Use Adafruit PN532 NFC/RFID controller to read NFC tag and fingerprint sensor to read fingerprint. Require both a valid NFC tag and a matching fingerprint to unlock the relay, and print nfc=<ok/fail>, fingerprint=<ok/fail>, unlock=<yes/no> to the serial console.
+PN532: (IRQ: 22, RESET: 23)
+Fingerprint: (RX: 18, TX: 19)
+
+
+[Energy_Usage_Alert_System]
+Monitor current using INA219, enter an alert state when current exceeds a safe threshold, clear the alert only after the current remains normal for a fixed duration, and print current=<value>, alert=<on/off> to the serial console.
+
+
+[Location_Based_Reminder]
+Parse GPS location data, compare against a predefined geographic region, trigger an alert when entering the region, and print lat=<value>, lon=<value>, inside_region=<yes/no> to the serial console.
+
+
+[SGP40_VOC_Index_Algorithm]
+Initialize the SGP40 Air Quality Sensor, read the raw VOC measurement once per second, implement the VOC index calculation, and print both raw_voc=<value> and voc_index=<value> to the serial console.
+
+
+[PN532_Tag_Authentication_and_Block_Read]
+Authenticate an NFC card block using the PN532 NFC/RFID controller, read the block data after successful authentication, and print auth=<ok/fail>, block_data=<hex bytes> to the serial console.
+
+
+[SD_Card_File_Write_Read_Append]
+Create a text file on the SD card (128GB microSDXC card (exFAT)), write initial content “hello world”, append additional line “iot-skillsbench” without overwriting, read the file back, and print the full file content to the serial console.
+
+
+[Smart_Health_and_Environment_Monitoring_Station]
+Develop a monitoring system that concurrently tracks human vitals and ambient air quality. The program must poll the Pulse Oximeter and Heart Rate Sensor MAX30101 & MAX32664 via I2C to obtain heart rate and SpO2 levels while simultaneously calculating the VOC Index from the SGP40 Air Quality Sensor. Implement a "Warning Mode" where if the VOC Index exceeds a specific threshold or the heart rate drops below a set value, the LCD1602 background backlight flashes and displays a high-priority alert message.
+
+
+[Secure_Asset_Tracker_with_eInk_Logging]
+Create a secure logging system for mobile assets. The system remains in a low-power "Locked" state until a valid NFC tag is scanned via the PN532 NFC/RFID controller. Upon successful authentication, the system must trigger a UART interrupt to parse the latest GPRMC sentence from the GPS module. The current coordinates, timestamp, and authorized user ID must then be rendered onto the eInk Display, utilizing the SRAM buffer to ensure the image is correctly updated before the system returns to sleep.
+
+
+[Biometric_Safe_with_Power_Analytics_and_Audit_Trail]
+Build a high-security vault controller. The system must wait for a Fingerprint Sensor match. Upon a successful "Level 1" match, the program activates a Relay to unlock the door. While the relay is active, use the INA219 to monitor the current draw of the locking mechanism to detect mechanical jams (indicated by a current spike). Every access attempt—including the fingerprint ID, the timestamp (if available), and the peak current measured during the operation—must be appended to a .log file on the Micro SD Card using the SPI bus.
