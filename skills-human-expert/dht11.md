@@ -1,21 +1,26 @@
 ---
 name: DHT11 Temperature Sensor
-description: This skill is for the the DHT11 Temperature Sensor
+description: A digital sensor for temperature and relative humidity (RH).
 ---
-## DHT11 Sensor
 
-The DHT11 is a basic digital temperature and humidity sensor with a single-wire
-half-duplex interface. It is powered from 3.3V to 5V and outputs 40 bits per read.
-Minimum interval between reads is **2 seconds**.
+## Pinout
 
-| Property | Value |
+| Name | Description |
 |---|---|
-| Temperature Range | 0°C to 50°C |
-| Temperature Accuracy | ±2°C |
-| Humidity Range | 20% to 90% RH |
-| Humidity Accuracy | ±5% RH |
-| Supply Voltage | 3.3V to 5V |
-| Interface | Single-wire half-duplex |
+| VCC | Voltage supply |
+| GND | Ground |
+| DATA | Serial data output |
+
+
+## Operation
+
+- DHT11 communicates via a **single-wire** **half-duplex** interface. It is powered from 3.3V to 5V and outputs 40 bits per read. Minimum interval between reads is **2 seconds**.
+
+- Attributes and detection range: 
+    - **Temperature range**: 0°C to 50°C;
+    - **Temperature accuracy**: ±2°C;
+    - **Humidity range**: 20% to 90% relative humidity (RH)
+    - **Humidity accuracy**: ±5% RH
 
 ---
 
